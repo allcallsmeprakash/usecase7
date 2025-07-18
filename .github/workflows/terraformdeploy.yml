@@ -50,7 +50,7 @@ jobs:
             exit 1
           fi
 
-          IMAGE_URI="082041771564.dkr.ecr.us-east-1.amazonaws.com/hello-lambda@${IMAGE_DIGEST}"
+          IMAGE_URI="082041771564.dkr.ecr.us-east-1.amazonaws.com/hello-lambda:latest"
           echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT
 
       - name: Terraform Plan (with image_uri)
