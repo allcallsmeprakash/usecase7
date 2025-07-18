@@ -62,7 +62,7 @@ jobs:
       
       - name: Update terraform.tfvars with new image_uri
         run: |
-          sed -i "s|^image_uri *=.*|image_uri = \"$ECR_URI:latest\"|g" terraform.tfvars
+          sed -i "s|^image_uri *=.*|image_uri = \"$ECR_URI:latest\"|g" terraform/environments/dev/terraform.tfvars
 
       - name: Delete all other tags except latest (optional)
         run: |
