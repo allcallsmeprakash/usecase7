@@ -2,6 +2,7 @@ name: Terraform
 
 on:
   workflow_dispatch:
+  # Uncomment below to enable automatic runs on push or PR to main
   # push:
   #   branches:
   #     - main
@@ -36,16 +37,19 @@ jobs:
       - name: Terraform Validate
         run: terraform -chdir=terraform/environments/dev validate
 
-      - name: Terraform Apply (Create Infra)
-        run: terraform -chdir=terraform/environments/dev apply -auto-approve
-
       - name: Get Latest Image Digest from ECR
         id: ecr
         run: |
           IMAGE_DIGEST=$(aws ecr describe-images \
             --repository-name hello-world \
-            --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageDigest' \
+            --query 'sort_by(imageDetails,&imagePushedAt)[-1].imageDigest' \
             --output text)
+
+          if [ -z "$IMAGE_DIGEST" ]; then
+            echo "No image digest found. Make sure the image is pushed to ECR."
+            exit 1
+          fi
+
           IMAGE_URI="082041771564.dkr.ecr.us-east-1.amazonaws.com/hello-world@${IMAGE_DIGEST}"
           echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT
 
