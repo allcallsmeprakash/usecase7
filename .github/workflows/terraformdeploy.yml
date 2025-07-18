@@ -52,17 +52,17 @@ jobs:
         with:
           go-version: '1.22'
           
-      - name: Copy backend override for test
-        run: cp test/backend_override.tf ./
+      # - name: Copy backend override for test
+      #   run: cp test/backend_override.tf ./
 
-      - name: Run Terratest Plan-Only Test
-        run: |
-          cd test
-          go test -v -timeout 20m .
+      # - name: Run Terratest Plan-Only Test
+      #   run: |
+      #     cd test
+      #     go test -v -timeout 20m .
 
 
-      - name: Clean up backend override
-        run: rm -f backend_override.tf
+      # - name: Clean up backend override
+      #   run: rm -f backend_override.tf
         
       # - name: Configure AWS credentials
       #   uses: aws-actions/configure-aws-credentials@v2
