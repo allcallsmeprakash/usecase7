@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'app/**'
-      - '.github/workflows/ci-all.yml'
+      - 'terraform/modules/lambda_function/**'
     branches:
       - main
 
