@@ -4,7 +4,7 @@ terraform {
   backend "s3" {
     bucket = "training-usecases"
     key    = "usecase7/bootstrap/terraform.tfstate"
-    region = "ap-south-1"
+    region = "us-east-1"
     use_lockfile = true
   }
 }
